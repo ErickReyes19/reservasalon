@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('equipo_reservas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('idEquipo');
+            $table->foreign(['idEquipo'])->references(['id'])->on('equipos')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->unsignedBigInteger('idReserva');
+            $table->foreign(['idReserva'])->references(['id'])->on('Reservas')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

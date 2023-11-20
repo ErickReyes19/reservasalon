@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('extras_reservas', function (Blueprint $table) {
+        Schema::create('extra_reservas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('idExtra');
+            $table->foreign(['idExtra'])->references(['id'])->on('extras')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->unsignedBigInteger('idReserva');
+            $table->foreign(['idReserva'])->references(['id'])->on('Reservas')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();
         });
     }
