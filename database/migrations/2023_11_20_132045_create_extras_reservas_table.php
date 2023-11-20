@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('extra_reservas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('idReserva');
+            $table->foreign(['idReserva'])->references(['id'])->on('reservas')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->unsignedBigInteger('idExtra');
             $table->foreign(['idExtra'])->references(['id'])->on('extras')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->unsignedBigInteger('idReserva');
-            $table->foreign(['idReserva'])->references(['id'])->on('Reservas')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

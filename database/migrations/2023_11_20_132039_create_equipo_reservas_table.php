@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idEquipo');
             $table->foreign(['idEquipo'])->references(['id'])->on('equipos')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->unsignedBigInteger('idReserva');
-            $table->foreign(['idReserva'])->references(['id'])->on('Reservas')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['idReserva'])->references(['id'])->on('reservas')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

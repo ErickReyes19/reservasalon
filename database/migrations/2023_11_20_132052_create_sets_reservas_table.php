@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idSet');
             $table->foreign(['idSet'])->references(['id'])->on('sets')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->unsignedBigInteger('idReserva');
-            $table->foreign(['idReserva'])->references(['id'])->on('Reservas')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['idReserva'])->references(['id'])->on('reservas')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();
         });
     }
