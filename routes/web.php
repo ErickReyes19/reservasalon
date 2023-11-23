@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsistenteController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\ExtraController;
 use App\Http\Controllers\ProfileController;
@@ -67,9 +68,20 @@ Route::group(['prefix' => 'equipo'], function () {
     });
 });
 
+Route::group(['prefix' => 'asistente'], function () {
+    Route::controller(AsistenteController::class)->group(function () {
+        Route::get('/', 'index')->middleware(['auth'])->name('asistente.index');
+        Route::get('/create', 'create')->middleware(['auth'])->name('asistente.create');
+        Route::get('/edit/{id}', 'edit')->middleware(['auth'])->name('asistente.edit');
+        Route::post('/store', 'store')->middleware(['auth'])->name('asistente.store');
+        Route::post('/update/{id}', 'update')->middleware(['auth'])->name('asistente.update');
+        // Route::get('/desactive/{id}', 'desactive')->middleware(['auth'])->name('equipo.desactive');
+    });
+});
+
 Route::group(['prefix' => 'reserva'], function () {
     Route::controller(ReservaController::class)->group(function () {
-        // Route::get('/', 'index')->middleware(['auth'])->name('reserva.index');
+        Route::get('/', 'index')->middleware(['auth'])->name('reserva.index');
         Route::get('/calendario', 'calendario')->middleware(['auth'])->name('reserva.calendario');
         Route::get('/create', 'create')->middleware(['auth'])->name('reserva.create');
         Route::get('/validarReserva', 'validarReserva')->middleware(['auth'])->name('reserva.validarReserva');

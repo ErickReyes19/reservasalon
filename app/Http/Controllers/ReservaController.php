@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asistente;
+use App\Models\AsistenteReserva;
 use App\Models\Equipo;
 use App\Models\EquipoReserva;
 use App\Models\Extra;
@@ -9,6 +11,8 @@ use App\Models\ExtraReserva;
 use App\Models\Reserva;
 use App\Models\Set;
 use App\Models\SetReserva;
+use App\Models\User;
+use App\Models\UserReserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +29,16 @@ class ReservaController extends Controller
             return response()->json(['error' => 'Error' . $th], 500);
         }
     }
+    public function index()
+    {
+        try {
+            $reservas = Reserva::where('idUsuario', Auth::id())->get();
+            return view('reserva.index', compact('reservas'));
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error' . $th], 500);
+        }
+    }
+
     public function create()
     {
         $equipos = Equipo::where('estado', 1)->get();
@@ -37,7 +51,7 @@ class ReservaController extends Controller
     {
         try {
             $request->validate([
-                'fecha' => 'required|date',
+                'fecha' => 'required|date|after_or_equal:today',
                 'hora_inicio' => 'required|date_format:H:i',
                 'hora_final' => 'required|date_format:H:i|after:hora_inicio',
             ]);
@@ -50,16 +64,23 @@ class ReservaController extends Controller
             if ($conflicto) {
                 return response()->json(['message' => 'Ya hay una reserva para esa fecha y horario.'], 404);
             }
+            $usuarios = User::where('id', '!=', Auth::id())->get();
+
 
             $equipos = Equipo::where('estado', 1)->get();
             $sets = Set::where('estado', 1)->get();
             $extras = Extra::where('estado', 1)->get();
+            $asistentes = Asistente::where('estado', 1)
+                ->where('idUsuario', Auth::id())
+                ->get();
 
             return response()->json([
                 'message' => 'Reserva disponible.',
                 'equipos' => $equipos->toArray(),
+                'usuarios' => $usuarios->toArray(),
                 'sets' => $sets->toArray(),
                 'extras' => $extras->toArray(),
+                'asistentes' => $asistentes->toArray(),
             ], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error ' . $e], 500);
@@ -126,10 +147,24 @@ class ReservaController extends Controller
                 $extraReserva->idReserva = $reserva->id;
                 $extraReserva->save();
             }
+            foreach ($request->asistentes as $asistenteId) {
+                $asistenteReserva = new AsistenteReserva();
+                $asistenteReserva->idAsistente = $asistenteId;
+                $asistenteReserva->idReserva = $reserva->id;
+                $asistenteReserva->save();
+            }
+            foreach ($request->usuarios as $usuariosId) {
+                $userReserva = new UserReserva();
+                $userReserva->idUser = $usuariosId;
+                $userReserva->idReserva = $reserva->id;
+                $userReserva->save();
+            }
 
             return response()->json(['message' => 'Reserva creada con éxito.'], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => 'Error: ' . $th], 500);
         }
     }
+
+    
 }

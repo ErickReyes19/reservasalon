@@ -59,6 +59,22 @@
                                 <!-- Aquí se agregarán los checkboxes de Extras -->
                             </div>
                         </div>
+                        <div class="border rounded p-4 shadow m-4">
+
+                            <h4>Asistentes:</h4>
+                            <input type="text" id="searchAsistentes" class="form-control mb-2" placeholder="Buscar Extras">
+                            <div class="checkbox-list d-flex flex-wrap p-4" id="asistentes-list">
+                                <!-- Aquí se agregarán los checkboxes de Extras -->
+                            </div>
+                        </div>
+                        <div class="border rounded p-4 shadow m-4">
+
+                            <h4>Usuarios:</h4>
+                            <input type="text" id="searchUsuarios" class="form-control mb-2" placeholder="Buscar Extras">
+                            <div class="checkbox-list d-flex flex-wrap p-4" id="usuarios-list">
+                                <!-- Aquí se agregarán los checkboxes de Extras -->
+                            </div>
+                        </div>
                         <div class="form-group mt-3">
                             <button type="submit" class="btn btn-dark">Crear</button>
                         </div>
@@ -180,6 +196,8 @@
                     generarCheckboxes("equipos-list", response.equipos, "equipos[]");
                     generarCheckboxes("sets-list", response.sets, "sets[]");
                     generarCheckboxes("extras-list", response.extras, "extras[]");
+                    generarCheckboxes("asistentes-list", response.asistentes, "asistentes[]");
+                    generarCheckboxesuser("usuarios-list", response.usuarios, "usuarios[]");
 
                     setTimeout(function() {
                         mensajeDiv.hide();
@@ -230,6 +248,19 @@
             });
         }
 
+        function generarCheckboxesuser(containerId, items, name) {
+            var container = $("#" + containerId);
+            container.empty();
+            $.each(items, function(index, item) {
+                container.append(`
+                    <div class="custom-control custom-checkbox mr-3 mb-3 col-md-4">
+                        <input type="checkbox" class="custom-control-input" id="${name}-${index}" name="${name}" value="${item.id}">
+                        <label class="custom-control-label" for="${name}-${index}">${item.name}</label>
+                    </div>
+                `);
+            });
+        }
+
         // Agregar funciones para manejar la búsqueda
         $("#searchEquipos").on("input", function() {
             filtrarCheckboxes("equipos-list", this.value);
@@ -241,6 +272,14 @@
 
         $("#searchExtras").on("input", function() {
             filtrarCheckboxes("extras-list", this.value);
+        });
+
+        $("#searchUsuarios").on("input", function() {
+            filtrarCheckboxes("extras-list", this.value);
+        });
+
+        $("#searchAsistentes").on("input", function() {
+            filtrarCheckboxes("asistentes-list", this.value);
         });
 
         function filtrarCheckboxes(containerId, filtro) {

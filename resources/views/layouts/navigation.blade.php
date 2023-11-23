@@ -17,6 +17,11 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('reserva.index')" :active="request()->routeIs('reserva*')">
+                        Reservas
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('tipoequipo.index')" :active="request()->routeIs('tipoequipo*')">
                         Tipos de Equipo
                     </x-nav-link>
@@ -34,6 +39,11 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('extra.index')" :active="request()->routeIs('extra*')">
                         Extras
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('asistente.index')" :active="request()->routeIs('asistente*')">
+                        Asistentes
                     </x-nav-link>
                 </div>
             </div>
