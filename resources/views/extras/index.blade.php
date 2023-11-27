@@ -15,7 +15,6 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>disponible</th>
                         <th>Estado</th>
                         <th style="text-align: end">Opciones</th>
                     </tr>
@@ -25,13 +24,6 @@
                     <tr>
                         <td>{{ $extra->nombre }}</td>
                         <td>{{ $extra->descripcion }}</td>
-                        <td>
-                            @if($extra->disponible == 1)
-                            Disponible
-                            @else
-                            No Disponible
-                            @endif
-                        </td>
                         <td>
                             @if($extra->estado == 1)
                             Activo

@@ -4,9 +4,9 @@
         <div class="container py-5 px-5 ">
             <div class="row">
                 <div class="col-12 mb-5" style="text-align: end">
-                    <a href="{{ route('equipo.create') }}">
+                    <a href="{{ route('accesorio.create') }}">
                         <button class="btn btn-dark">
-                            <i class="fa-regular fa-square-plus" style="color: #ffffff;"></i> Nuevo equipo
+                            <i class="fa-regular fa-square-plus" style="color: #ffffff;"></i> Nuevo accesorio
                         </button>
                     </a>
                 </div>
@@ -30,29 +30,29 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Tipo de Equipo</th>
+                        <th>Tipo de Accesorio</th>
                         <th>Nombre Usuario</th>
                         <th>Estado</th>
                         <th style="text-align: end">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($equipos as $equipo)
+                    @foreach ($accesorios as $accesorio)
                     <tr>
-                        <td>{{ $equipo->nombre }}</td>
-                        <td>{{ $equipo->descripcion }}</td>
-                        <td>{{ $equipo->tipo_equipos->nombre }}</td>
-                        <td>{{ $equipo->users->name }}</td>
+                        <td>{{ $accesorio->nombre }}</td>
+                        <td>{{ $accesorio->descripcion }}</td>
+                        <td>{{ $accesorio->tipo_accesorios->nombre }}</td>
+                        <td>{{ $accesorio->users->name }}</td>
                         <td>
-                            @if($equipo->estado == 1)
+                            @if($accesorio->estado == 1)
                             Activo
                             @else
                             Inactivo
                             @endif
                         </td>
                         <td style="text-align: end">
-                            @if(auth()->check() && $equipo->idUsuario == auth()->user()->id)
-                            <a href="{{ route('equipo.edit', $equipo->id) }}">
+                            @if(auth()->check() && $accesorio->idUsuario == auth()->user()->id)
+                            <a href="{{ route('accesorio.edit', $accesorio->id) }}">
                                 <button class="btn btn-dark">
                                     <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
                                 </button>

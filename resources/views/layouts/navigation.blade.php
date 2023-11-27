@@ -27,8 +27,18 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('tipoaccesorio.index')" :active="request()->routeIs('tipoaccesorio*')">
+                        Tipos de Accesorio
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('equipo.index')" :active="request()->routeIs('equipo*')">
                         Equipos
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('accesorio.index')" :active="request()->routeIs('accesorio*')">
+                        Accesorios
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">

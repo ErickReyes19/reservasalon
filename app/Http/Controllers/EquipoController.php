@@ -51,7 +51,6 @@ class EquipoController extends Controller
             $equipo->tipo_equipo_id = $request->tipo_equipo_id;
             $equipo->idUsuario = Auth::id();
             $equipo->estado = 1;
-            $equipo->disponible = 1;
             $equipo->save();
 
             return response()->json(['messaje' => 'Acción exitosa'], 200);
@@ -95,7 +94,6 @@ class EquipoController extends Controller
             $equipo->tipo_equipo_id = $request->tipo_equipo_id;
             $equipo->idUsuario = Auth::id();
             $equipo->estado = $request->estado;
-            $equipo->disponible = $request->disponible;
             $equipo->save();
             return response()->json(['message' => 'Actualizado exitosamente.'], 200);
         } catch (\Throwable $th) {

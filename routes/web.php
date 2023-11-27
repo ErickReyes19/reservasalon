@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AccesorioController;
 use App\Http\Controllers\AsistenteController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\ExtraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\SetController;
+use App\Http\Controllers\TipoAccesorioController;
 use App\Http\Controllers\TipoEquipoController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,16 @@ Route::group(['prefix' => 'tipoequipo'], function () {
         Route::post('/store', 'store')->middleware(['auth'])->name('tipoequipo.store');
         Route::post('/update/{id}', 'update')->middleware(['auth'])->name('tipoequipo.update');
         Route::get('/desactive/{id}', 'desactive')->middleware(['auth'])->name('tipoequipo.desactive');
+    });
+});
+
+Route::group(['prefix' => 'tipoaccesorio'], function () {
+    Route::controller(TipoAccesorioController::class)->group(function () {
+        Route::get('/', 'index')->middleware(['auth'])->name('tipoaccesorio.index');
+        Route::get('/create', 'create')->middleware(['auth'])->name('tipoaccesorio.create');
+        Route::get('/edit/{id}', 'edit')->middleware(['auth'])->name('tipoaccesorio.edit');
+        Route::post('/store', 'store')->middleware(['auth'])->name('tipoaccesorio.store');
+        Route::post('/update/{id}', 'update')->middleware(['auth'])->name('tipoaccesorio.update');
     });
 });
 
@@ -67,6 +79,17 @@ Route::group(['prefix' => 'equipo'], function () {
         // Route::get('/desactive/{id}', 'desactive')->middleware(['auth'])->name('equipo.desactive');
     });
 });
+Route::group(['prefix' => 'accesorio'], function () {
+    Route::controller(AccesorioController::class)->group(function () {
+        Route::get('/', 'index')->middleware(['auth'])->name('accesorio.index');
+        Route::get('/create', 'create')->middleware(['auth'])->name('accesorio.create');
+        Route::get('/edit/{id}', 'edit')->middleware(['auth'])->name('accesorio.edit');
+        Route::post('/store', 'store')->middleware(['auth'])->name('accesorio.store');
+        Route::post('/update/{id}', 'update')->middleware(['auth'])->name('accesorio.update');
+        // Route::get('/desactive/{id}', 'desactive')->middleware(['auth'])->name('equipo.desactive');
+    });
+});
+
 
 Route::group(['prefix' => 'asistente'], function () {
     Route::controller(AsistenteController::class)->group(function () {

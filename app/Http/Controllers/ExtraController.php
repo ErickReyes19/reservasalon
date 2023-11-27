@@ -38,7 +38,6 @@ class ExtraController extends Controller
             $extra->nombre = $request->nombre;
             $extra->descripcion = $request->descripcion;
             $extra->estado = 1;
-            $extra->disponible = 1;
             $extra->save();
 
             return response()->json(['messaje' => 'Acción exitosa'], 200);
@@ -73,7 +72,6 @@ class ExtraController extends Controller
             $extra->nombre = $request->nombre;
             $extra->descripcion = $request->descripcion;
             $extra->estado = $request->estado;
-            $extra->disponible = $request->disponible;
             $extra->save();
             return response()->json(['message' => 'Actualizado exitosamente.'], 200);
         } catch (\Throwable $th) {
