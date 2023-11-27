@@ -1,7 +1,5 @@
 <x-app-layout>
     <div class="row justify-content-center">
-        <div class="row">
-        </div>
         <div class="col-md-10 bg-white my-4 py-4 shadow p-3 mb-5 bg-body-tertiary rounded" style="height: 100%;">
             <div class="col-12 mb-5" style="text-align: end">
                 <a href="{{ route('reserva.create') }}">
@@ -28,6 +26,10 @@
                 };
             });
 
+            
+
+
+
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
@@ -38,11 +40,15 @@
                 selectable: true,
                 initialView: 'dayGridMonth',
                 events: events,
-                
+
 
                 eventClick: (info) => {
-                    
-                    
+
+                    var url = "{{ route('reserva.show', ':id') }}";
+                    url = url.replace(':id', info.event.id);
+
+                    window.location.href = url;
+
                 }
             });
 

@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserReserva extends Model
+class Accesorio extends Model
 {
     use HasFactory;
 
-    public function user()
+
+    public function accesorio()
     {
-        return $this->belongsTo(User::class, 'idUser');
+        return $this->belongsTo(Accesorio::class, 'idAccesorio');
     }
 }

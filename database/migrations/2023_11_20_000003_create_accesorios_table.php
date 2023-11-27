@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('equipos', function (Blueprint $table) {
+        Schema::create('accesorios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->unsignedBigInteger('tipo_equipo_id');
-            $table->foreign(['tipo_equipo_id'])->references(['id'])->on('tipo_equipos')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->unsignedBigInteger('tipo_accesorios_id');
+            $table->foreign(['tipo_accesorios_id'])->references(['id'])->on('tipo_accesorios')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->unsignedBigInteger('idUsuario');
             $table->foreign(['idUsuario'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->boolean('estado');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('equipos');
+        Schema::dropIfExists('accesorios');
     }
 };

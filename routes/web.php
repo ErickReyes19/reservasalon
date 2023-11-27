@@ -86,6 +86,7 @@ Route::group(['prefix' => 'reserva'], function () {
         Route::get('/create', 'create')->middleware(['auth'])->name('reserva.create');
         Route::get('/validarReserva', 'validarReserva')->middleware(['auth'])->name('reserva.validarReserva');
         // Route::get('/edit/{id}', 'edit')->middleware(['auth'])->name('reserva.edit');
+        Route::get('/show/{id}', 'show')->middleware(['auth'])->name('reserva.show');
         Route::post('/store', 'store')->middleware(['auth'])->name('reserva.store');
         // Route::post('/update/{id}', 'update')->middleware(['auth'])->name('reserva.update');
     });

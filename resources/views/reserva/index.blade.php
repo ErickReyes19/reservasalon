@@ -24,7 +24,7 @@
                     center: 'title',
                     right: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
-                
+
                 initialView: 'dayGridMonth',
                 events: events,
 

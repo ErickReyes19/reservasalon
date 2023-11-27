@@ -166,5 +166,33 @@ class ReservaController extends Controller
         }
     }
 
-    
+    public function show($id)
+    {
+        try {
+            $reserva = Reserva::with([
+                'equipos',
+                'sets',
+                'extras',
+                'asistentes',
+                'usuarios',
+            ])->find($id);
+            $reserva['users'] = User::find($reserva->idUsuario);
+
+            foreach ($reserva->equipos as $equipo) {
+                $nombreUsuario = $equipo->usuario->name;
+            }
+            
+            $mensaje = "No hay Reserva";
+
+            if (!$reserva) {
+                return view('reserva.show', compact('mensaje'));
+            }
+            
+
+            return view('reserva.show', compact('reserva'));
+            // return response()->json(['reserva' => $reserva], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error: ' . $th->getMessage()], 500);
+        }
+    }
 }

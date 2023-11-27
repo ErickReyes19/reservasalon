@@ -20,6 +20,8 @@ return new class extends Migration
             $table->time('hora_final');
             $table->unsignedBigInteger('idUsuario');
             $table->foreign(['idUsuario'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->unsignedBigInteger('idTipoReserva');
+            $table->foreign(['idTipoReserva'])->references(['id'])->on('tipo_reserva')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();
         });
     }
@@ -31,4 +33,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('reservas');
     }
+
+    
 };
