@@ -75,7 +75,7 @@ class AccesorioController extends Controller
             $tipoAccesorios = TipoAccesorio::where('estado', 1)->get();
             return view('accesorios.edit', compact('accesorio', 'tipoAccesorios'));
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Error', $th], 500);
+            return response()->json(['error' => 'Error', $th->getMessage()], 500);
         }
     }
 

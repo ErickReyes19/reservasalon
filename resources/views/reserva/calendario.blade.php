@@ -14,6 +14,8 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
 
     <script>
+
+
         document.addEventListener('DOMContentLoaded', function() {
             var reservas = @json($reservas);
             var events = reservas.map(function(reserva) {
@@ -22,16 +24,19 @@
                     title: reserva.nombre,
                     start: reserva.fecha + ' ' + reserva.hora_inicio,
                     end: reserva.fecha + ' ' + reserva.hora_final,
-                    description: reserva.descripcion
+                    description: reserva.descripcion,
+                    color: reserva.color || 'yellow',
+                    editable:true
                 };
             });
 
-            
+
 
 
 
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                eventColor: 'green',
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
@@ -40,6 +45,7 @@
                 selectable: true,
                 initialView: 'dayGridMonth',
                 events: events,
+                
 
 
                 eventClick: (info) => {

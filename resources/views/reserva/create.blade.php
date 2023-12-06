@@ -20,6 +20,14 @@
                         <label for="hora_final">Hora de Fin:</label>
                         <input type="time" class="form-control" id="hora_final" name="hora_final" required>
                     </div>
+                    <div class="form-group">
+                        <label for="tipoReserva">Tipo de reserva:</label>
+                        <select class="form-control" name="tipoReserva" id="tipoReserva">
+                            @foreach ($tipoReservas as $tipoReserva)
+                            <option value="{{ $tipoReserva->id }}">{{ $tipoReserva->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group mt-3">
                         <button type="button" class="btn btn-dark" onclick="validarDisponibilidad()">Validar Reserva</button>
                     </div>
@@ -64,7 +72,15 @@
                             <h4>Asistentes:</h4>
                             <input type="text" id="searchAsistentes" class="form-control mb-2" placeholder="Buscar Extras">
                             <div class="checkbox-list d-flex flex-wrap p-4" id="asistentes-list">
-                                <!-- Aquí se agregarán los checkboxes de Extras -->
+                                <!-- Aquí se agregarán los checkboxes de Asistentes -->
+                            </div>
+                        </div>
+                        <div class="border rounded p-4 shadow m-4">
+
+                            <h4>Accesorios:</h4>
+                            <input type="text" id="searchAsistentes" class="form-control mb-2" placeholder="Buscar Extras">
+                            <div class="checkbox-list d-flex flex-wrap p-4" id="accesorios-list">
+                                <!-- Aquí se agregarán los checkboxes de Accesorios -->
                             </div>
                         </div>
                         <div class="border rounded p-4 shadow m-4">
@@ -72,7 +88,7 @@
                             <h4>Usuarios:</h4>
                             <input type="text" id="searchUsuarios" class="form-control mb-2" placeholder="Buscar Extras">
                             <div class="checkbox-list d-flex flex-wrap p-4" id="usuarios-list">
-                                <!-- Aquí se agregarán los checkboxes de Extras -->
+                                <!-- Aquí se agregarán los checkboxes de Usuarios -->
                             </div>
                         </div>
                         <div class="form-group mt-3">
@@ -175,6 +191,7 @@
             var fecha = $("#fecha").val();
             var horaInicio = $("#hora_inicio").val();
             var horaFin = $("#hora_final").val();
+            var tipoReserva = $("#tipoReserva").val();
 
             $.ajax({
                 type: "GET",
@@ -182,7 +199,8 @@
                 data: {
                     fecha: fecha,
                     hora_inicio: horaInicio,
-                    hora_final: horaFin
+                    hora_final: horaFin,
+                    tipoReserva: tipoReserva,
                 },
                 success: function(response) {
                     var mensajeDiv = $("#mensaje");
@@ -197,6 +215,7 @@
                     generarCheckboxes("sets-list", response.sets, "sets[]");
                     generarCheckboxes("extras-list", response.extras, "extras[]");
                     generarCheckboxes("asistentes-list", response.asistentes, "asistentes[]");
+                    generarCheckboxes("accesorios-list", response.accesorios, "accesorios[]");
                     generarCheckboxesuser("usuarios-list", response.usuarios, "usuarios[]");
 
                     setTimeout(function() {

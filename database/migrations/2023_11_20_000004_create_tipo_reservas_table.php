@@ -11,10 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_reserva', function (Blueprint $table) {
+        Schema::create('tipo_reservas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->timestamps();
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('tipo_reservas');
     }
 };

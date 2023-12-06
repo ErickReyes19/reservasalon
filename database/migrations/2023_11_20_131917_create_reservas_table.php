@@ -18,10 +18,11 @@ return new class extends Migration
             $table->date('fecha');
             $table->time('hora_inicio');
             $table->time('hora_final');
+            $table->string('color');
             $table->unsignedBigInteger('idUsuario');
             $table->foreign(['idUsuario'])->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->unsignedBigInteger('idTipoReserva');
-            $table->foreign(['idTipoReserva'])->references(['id'])->on('tipo_reserva')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['idTipoReserva'])->references(['id'])->on('tipo_reservas')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

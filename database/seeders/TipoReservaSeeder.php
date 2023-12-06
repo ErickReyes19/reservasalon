@@ -14,7 +14,7 @@ class TipoReservaSeeder extends Seeder
     public function run()
     {
         // Insertar registros en la tabla tipo_reserva
-        DB::table('tipo_reserva')->insert([
+        DB::table('tipo_reservas')->insert([
             ['nombre' => 'salon'],
             ['nombre' => 'externa'],
         ]);
